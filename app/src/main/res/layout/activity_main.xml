@@ -41,7 +41,26 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content" />
 
-
+<RadioGroup
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+  <RadioButton
+      android:id="@+id/optMa"
+      android:text="Mañana"
+      android:checked="true"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" />
+  <RadioButton
+    android:id="@+id/optTa"
+    android:text="Tarde"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" />
+  <RadioButton
+      android:id="@+id/optNo"
+      android:text="Noche"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" />
+</RadioGroup>
 
   <Button
       android:id="@+id/btnSaludar"
@@ -66,6 +85,12 @@
       android:text="Verificar Terminos"
       android:layout_width="match_parent"
       android:layout_height="wrap_content" />
+
+   <Button
+       android:id="@+id/Turno"
+       android:text="Identificar Turno"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content" />
 
 
 </LinearLayout>

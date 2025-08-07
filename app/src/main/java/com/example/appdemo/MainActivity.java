@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -17,10 +18,12 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnSaludar, btnFinalizar, btnPreguntar, btnVerificar;
+    Button btnSaludar, btnFinalizar, btnPreguntar, btnVerificar, btnTurno;
     EditText EdtNombres;
 
     SwitchCompat switchTerminos;
+
+    RadioButton optMa, optTa, optNo;
 
     private void loadUI() {
         btnSaludar = findViewById(R.id.btnSaludar);
@@ -30,6 +33,12 @@ public class MainActivity extends AppCompatActivity {
 
         btnVerificar = findViewById(R.id.btnVerificar);
         switchTerminos = findViewById(R.id.swtTerminos);
+
+        btnTurno = findViewById(R.id.Turno);
+
+        optMa = findViewById(R.id.optMa);
+        optTa = findViewById(R.id.optTa);
+        optNo = findViewById(R.id.optNo);
     }
 
     private void Saludar() {
@@ -58,6 +67,24 @@ public class MainActivity extends AppCompatActivity {
 
         dialogo.show();
 
+    }
+
+    public void turnoIdentificado() {
+        boolean aceptadoMa = optMa.isChecked();
+        boolean aceptadoTa = optTa.isChecked();
+        boolean aceptadoNo = optNo.isChecked();
+
+        if (aceptadoMa) {
+            Toast.makeText(getApplicationContext(), "Su turno es de mañana", Toast.LENGTH_LONG).show();
+        }
+
+        if (aceptadoTa) {
+            Toast.makeText(getApplicationContext(), "Su turno es de la tarde", Toast.LENGTH_LONG).show();
+        }
+
+        if (aceptadoNo) {
+            Toast.makeText(getApplicationContext(), "Su turno es de noche", Toast.LENGTH_LONG).show();
+        }
     }
 
     private void validarTerminos() {
@@ -107,6 +134,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 validarTerminos();
+            }
+        });
+
+        btnTurno.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                turnoIdentificado();
             }
         });
     }

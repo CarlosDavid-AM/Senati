@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">AppJhon</string>
     <string name="institucion">Senati</string>
+    <string name="spinner_products">Seleccione un producto</string>
 </resources>

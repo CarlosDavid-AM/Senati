@@ -13,6 +13,7 @@
     <Spinner
         android:id="@+id/lstProductos"
         android:spinnerMode="dialog"
+        android:prompt="@string/spinner_products"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -21,5 +22,15 @@
         android:spinnerMode="dialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <ImageView
+        android:src="@drawable/van"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+    
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp" />
 
 </LinearLayout>

@@ -1,8 +1,15 @@
 package com.example.appdemo;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,11 +22,14 @@ import java.util.ArrayList;
 public class WidgetAdicionales extends AppCompatActivity {
 
     Spinner lstProduct, lstTienda;
+    WebView webView;
 
     private void loadUI() {
         lstProduct = findViewById(R.id.lstProductos);
         lstTienda = findViewById(R.id.lstTienda);
+        webView = findViewById(R.id.webView);
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +42,31 @@ public class WidgetAdicionales extends AppCompatActivity {
             return insets;
         });
 
+        // Reff
         loadUI();
 
+        // Cargar Datos
+        cargarProductos();
+        cargarTienda();
+        cargarVideo();
+
+        // Eventos
+        // Identificando el valor seleccionado
+        lstProduct.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Product productSelect = (Product) lstProduct.getSelectedItem();
+                Toast.makeText(getApplicationContext(), String.valueOf(productSelect.getPrice()), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Nada
+            }
+        });
+    }
+
+    private void cargarProductos() {
         // Procedimientos para poblar un SPINER
 
         // P1: Create a collection of type products.
@@ -49,9 +82,9 @@ public class WidgetAdicionales extends AppCompatActivity {
         // P3: ¡El ArrayList ya tiene datos! > Adactador > Spiner
         ArrayAdapter<Product> adapterProduct = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, listProduct);
         lstProduct.setAdapter(adapterProduct);
+    }
 
-
-
+    private void cargarTienda() {
         ArrayList<Tienda> listTienda = new ArrayList<>();
 
         listTienda.add(new Tienda(1, "Totus" , "123456"));
@@ -62,5 +95,20 @@ public class WidgetAdicionales extends AppCompatActivity {
 
         ArrayAdapter<Tienda> adapterTienda = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, listTienda);
         lstTienda.setAdapter(adapterTienda);
+    }
+
+    @SuppressLint("SetJavaScriptEnabled")
+    private void cargarVideo() {
+        String frameVideo = "<iframe width=\"100%\" height=\"315\" src=\"https://www.youtube.com/embed/DlphYPc_HKk?si=1WfenwC6VzHub73r\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>";
+
+        // Habilitar JS
+        webView.getSettings().setJavaScriptEnabled(true);
+
+        // Manejador del reproductor de video
+        webView.setWebChromeClient(new WebChromeClient());
+
+        // Visor para nuestro navegador / bloquear el navegador
+        webView.setWebViewClient(new WebViewClient());
+        webView.loadData(frameVideo, "text/html", "utf-8");
     }
 }

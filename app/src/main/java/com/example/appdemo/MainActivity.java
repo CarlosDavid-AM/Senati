@@ -1,6 +1,7 @@
 package com.example.appdemo;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +19,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnSaludar, btnFinalizar, btnPreguntar, btnVerificar, btnTurno;
+    Button btnSaludar, btnFinalizar, btnPreguntar, btnVerificar, btnTurno, btnAbrirActivity;
     EditText EdtNombres;
 
     SwitchCompat switchTerminos;
@@ -39,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         optMa = findViewById(R.id.optMa);
         optTa = findViewById(R.id.optTa);
         optNo = findViewById(R.id.optNo);
+
+        btnAbrirActivity = findViewById(R.id.btnAbrirActivity);
     }
 
     private void Saludar() {
@@ -93,6 +96,11 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
     }
 
+    private void abrirActivity() {
+        Intent intent = new Intent(getApplicationContext(), WidgetAdicionales.class);
+        startActivity(intent);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -141,6 +149,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 turnoIdentificado();
+            }
+        });
+
+        btnAbrirActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abrirActivity();
             }
         });
     }
